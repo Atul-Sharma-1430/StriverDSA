@@ -34,13 +34,17 @@ public class BubbleSort {
     //                        because no swaps occur if the array is already sorted.
     public static void BSort(int [] nums) {
         for (int i = 0; i < nums.length; i++) {
+            boolean isSwapped = false;  // For Best Case
             for (int j = 0; j < nums.length - i - 1; j++) { // Bcz last me elements sorted hote chale jaate hain isliye ye condition
                 if (nums[j] > nums[j + 1]) {
                     int temp = nums[j];
                     nums[j] = nums[j + 1];
                     nums[j + 1] = temp;
+                    isSwapped = true;
                 }
             }
+
+            if(!isSwapped) break; // If Already Sorted then no swap will happen means loop runs one time only hence O(n)
         }
 
         System.out.println(Arrays.toString(nums));
