@@ -1,0 +1,8 @@
+What is a Subsequence..?
+--> It is a contigous / non contiguos sequence which follows the order.
+--> A subarray is only contiguos but a subsequence can be both
+--> And the order of the numbers in subsequence cannot be changed.
+--> eg [1,2,3] --> Subsequences are 1, 2, 3, {1,2}, {1,3}, {2,3}, {1,2,3}, {} Other shuffled Combinations
+    will not be considered.
+    A subarray can be a Sequence.
+
