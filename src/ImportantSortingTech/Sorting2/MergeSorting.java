@@ -61,7 +61,7 @@ public class MergeSorting {
     //    Best:    O(n log n)
     //    Average: O(n log n)
     //    Worst:   O(n log n)
-    //    O(n) for merging and O(logn) for recursion
+    //    O(n) for merging and O(log n) for recursion
     //
     //    Space Complexity:
     //    O(n) --> Extra temp array
