@@ -1,6 +1,8 @@
 package Arrays;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class RemoveDuplicatesFromSortedArray {
     public static void main(String[] args) {
@@ -22,16 +24,28 @@ public class RemoveDuplicatesFromSortedArray {
             array[i] = input.nextInt();
         }
 
-        System.out.println(rmvDuplicates1(array));
-        System.out.println(rmvDuplicate2(array));
+        System.out.println(better(array));
+        System.out.println(optimal(array));
 
         input.close();
+    }
+
+    // TC : O(n) cz Hashset taken O(1) time
+    // SC : O(n) Hashset
+    public static int brute(int [] array) {
+        Set<Integer> set = new HashSet<>();
+
+        for (int j : array) {
+            set.add(j);
+        }
+
+        return set.size();
     }
 
     // Pattern : Two Pointer
     // TC : O(n)
     // SC : O(1)
-    public static int rmvDuplicates1(int [] array) {
+    public static int better(int [] array) {
         int curr = 0;  // Points to the index of the last unique value
         int i = 1;  // Scans the array to find the next unique value
         int unique = 1;
@@ -51,7 +65,10 @@ public class RemoveDuplicatesFromSortedArray {
         return  unique;
     }
 
-    public static int rmvDuplicate2(int [] array) {
+    // Pattern : Two Pointer
+    // TC : O(n)
+    // SC : O(1)
+    public static int optimal(int [] array) {
         int curr = 0;  // Points to the index of the last unique value
         int next = 1;  // Scans the array to find the next unique value
         while(next < array.length) {
