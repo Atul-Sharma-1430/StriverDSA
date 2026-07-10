@@ -31,10 +31,13 @@ public class SecondLargestElement {
         int secondLargest = Integer.MIN_VALUE;
 
         for (int j : array) {
+            // Case 1: When we get a new largest element then the previous largest becomes second largest and new one will go in current largest
             if (j > largest) {
                 secondLargest = largest;
                 largest = j;
-            } else if (j > secondLargest && j != largest) {
+            }
+            // Case 2: When the current element is greater than secondLargest but less than or not equal largest at that time largest remains same but 2ndLargest changes
+            else if (j > secondLargest && j != largest) {
                 secondLargest = j;
             }
         }
