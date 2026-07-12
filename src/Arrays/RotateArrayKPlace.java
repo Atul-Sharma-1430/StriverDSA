@@ -34,7 +34,8 @@ public class RotateArrayKPlace {
         return array;
     }
 
-    // TC : O(
+    // TC : O(n)
+    // SC : O(1)
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
