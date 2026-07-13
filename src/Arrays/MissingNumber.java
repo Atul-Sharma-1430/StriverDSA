@@ -3,6 +3,8 @@ package Arrays;
 import java.util.Scanner;
 
 public class MissingNumber {
+    // TC : O(n)
+    // SC : O(1)
     public static int findMissingNumber(int[] array) {
         int total = 0;
 
@@ -18,6 +20,17 @@ public class MissingNumber {
 
     // TC : O(n)
     // SC : O(1)
+    public static int findMissingNumberXor(int [] array) {
+        int xor1 = 0, xor2 = 0;
+        for (int i = 0; i < array.length; i++) {
+            xor1 ^= array[i];  // Keep the xor of elem of array
+            xor2 ^= (i+1); // Keep the xor of natural num from 1 to n
+        }
+        xor2 = xor2 ^ array.length + 1;
+
+        return xor1 ^ xor2;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -31,7 +44,7 @@ public class MissingNumber {
             array[i] = sc.nextInt();
         }
 
-        int missing = findMissingNumber(array);
+        int missing = findMissingNumberXor(array);
 
         System.out.println("Missing Number: " + missing);
 
