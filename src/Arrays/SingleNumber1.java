@@ -1,5 +1,6 @@
 package Arrays;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class SingleNumber1 {
@@ -12,6 +13,30 @@ public class SingleNumber1 {
         }
 
         return ans;
+    }
+
+    // TC : O(2n+k)
+    // SC : O(k)
+    public static int findSingleNumber2(int [] array) {
+        int largest = 0;
+        for (int j : array) {
+            if (j > largest) largest = j;
+        }
+
+
+        int[] hashArray = new int[largest+1];
+        for (int j : array) {
+            hashArray[j]++;
+        }
+
+
+        for (int i = 0; i < hashArray.length; i++) {
+            if(hashArray[i] == 1)  {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     // TC : O(n)
@@ -29,7 +54,7 @@ public class SingleNumber1 {
             nums[i] = sc.nextInt();
         }
 
-        int result = findSingleNumber(nums);
+        int result = findSingleNumber2(nums);
 
         System.out.println("Single Number: " + result);
 
