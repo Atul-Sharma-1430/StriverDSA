@@ -113,4 +113,36 @@ public class LongestSubarraySum {
 
         return maxLen;
     }
+
+    // Two Pointer and Greedy
+    // This sliding window solution works only when all elements are non-negative. For arrays containing negative numbers, use the prefix sum + HashMap approach.
+    // TC : O(n)
+    // SC : O(1);
+    public static int optimal(int[] array, int target) {
+        int maxLen = 0;
+
+        int left = 0;  // Left pointer, removes elements when sum exceeds target
+        int right = 0; // Right pointer, adds new elements to the window
+        int sum = 0;   // Stores current window sum
+
+        while (right < array.length) {
+            sum += array[right];
+
+            // If current window sum equals target, update maximum length
+            if (sum == target) {
+                maxLen = Math.max(maxLen, right - left + 1);
+            }
+
+            // If sum exceeds target, shrink window from left
+            while (sum > target) {
+                sum -= array[left];
+                left++;
+            }
+
+            // Move right pointer after processing current element
+            right++;
+        }
+
+        return maxLen;
+    }
 }
