@@ -74,6 +74,8 @@ public class LongestSubarraySum {
 
     // TC : O(n)
     // SC : O(n)
+    // Works for negatives as well
+    // This is Optimal for array Containing negatives
     public static int better(int[] array, int target) {
         int maxLen = 0;
         long prefixSum = 0;// Carries the total sum till current index
