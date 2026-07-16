@@ -1,12 +1,10 @@
 package Arrays.Medium;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class TwoSum {
+public class TwoSum1 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -22,7 +20,7 @@ public class TwoSum {
         System.out.print("Enter the Target value: ");
         int target  = sc.nextInt();
 
-        System.out.println((Arrays.toString(twoSum(array, target))));
+        System.out.println((Arrays.toString(twoSumOptimal(array, target))));
     }
 
     // TC : O(n2)
@@ -43,7 +41,7 @@ public class TwoSum {
 
     // TC : O(n)
     // SC : O(n)
-    public static int[] twoSum(int[] array, int target) {
+    public static int[] twoSumOptimal(int[] array, int target) {
         HashMap<Integer, Integer> map = new HashMap<>();
 
         for(int i=0; i<array.length; i++) {
