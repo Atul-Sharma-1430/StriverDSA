@@ -54,6 +54,12 @@ class MaxSubarraySum {
             if (currSum <= 0) currSum = 0; // if anywhere sum becomes zero or negative means no need to carry previous elements sum as they will not give maxSum on adding further elements
         }
 
+        // If mentioned do not return negative sum;
+        // If all the array value is negative then it may return a negative value
+        if(maxSum < 0) {
+            return -1;
+        }
+
         return maxSum;
     }
 }
