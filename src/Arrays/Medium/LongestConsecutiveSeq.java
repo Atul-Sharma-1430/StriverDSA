@@ -1,7 +1,9 @@
 package Arrays.Medium;
 
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class LongestConsecutiveSeq {
     public static void main(String[] args) {
@@ -18,7 +20,7 @@ public class LongestConsecutiveSeq {
             array[i] = sc.nextInt();
         }
 
-        System.out.println("Longest Consecutive Sequence Length: " + lcsBrute(array));
+        System.out.println("Longest Consecutive Sequence Length: " + lcsOptimal(array));
 
         sc.close();
     }
@@ -84,5 +86,43 @@ public class LongestConsecutiveSeq {
         }
 
         return longest;
+    }
+
+    // TC : O(n)
+    // SC : O(n)
+    public static int lcsOptimal(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+
+        // Add all unique elements in set
+        for (int i = 0; i < nums.length; i++) {
+            set.add(nums[i]);
+        }
+
+        // stores max len
+        int maxLen = 0;
+
+        // Iterating over set not array cause array san give TLE
+        for (int num : set) {
+            // if the prev elem of current element does not exist means curr num can be our
+            // starting num of seq
+            if (!set.contains(num - 1)) {
+
+                // if we get starting num then check for it next further elements
+                int count = 1; // hence, count as 1 for the starting element
+                int j = 1; // a variable which keeps increasing to get next-next values
+
+                // if set contains next value then increase count and also j to get further next
+                // element
+                while (set.contains(num + j)) {
+                    j++;
+                    count++;
+                }
+
+                // Update maxLen if count is greater than maxLen
+                maxLen = Math.max(maxLen, count);
+            }
+        }
+
+        return maxLen;
     }
 }
