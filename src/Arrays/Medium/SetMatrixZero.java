@@ -39,6 +39,33 @@ public class SetMatrixZero {
         }
     }
 
+    // TC : O(m * n)
+    // SC : O(m + n)
+    public static void setZerosBetter(int[][] matrix) {
+
+        Set<Integer> set1 = new HashSet<>(); // Store those rows which contains zero
+        Set<Integer> set2 = new HashSet<>(); // Store those columns which contains zero
+
+        // Find rows and columns having zero
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    set1.add(i);
+                    set2.add(j);
+                }
+            }
+        }
+
+        // make complete row and column to zero
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (set1.contains(i) || set2.contains(j)) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -58,7 +85,7 @@ public class SetMatrixZero {
             }
         }
 
-        setZerosBrute(matrix);
+        setZerosBetter(matrix);
         System.out.println("Matrix after setting zeroes:");
 
         for (int i = 0; i < rows; i++) {
