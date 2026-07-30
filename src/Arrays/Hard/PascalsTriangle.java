@@ -22,6 +22,8 @@ public class PascalsTriangle {
             System.out.println();
         }
 
+        printTriangle2(rows);
+
         sc.close();
     }
 
@@ -61,6 +63,15 @@ public class PascalsTriangle {
         }
 
         return pTriangle;
+    }
+
+    // Method 2 to print pascals triangle using formula only
+    // TC : O(n2)
+    // SC : O(1)
+    public static void printTriangle2(int rows) {
+        for (int i = 1; i <= rows; i++) {
+            printRowOptimal(i);
+        }
     }
 
     // Question 2: If asked to print a particular value at given row, col
@@ -110,14 +121,14 @@ public class PascalsTriangle {
 
         System.out.print(ans);
 
-        for (int i = 1; i <= row - 2; i++) {
+        for (int i = 1; i <= row - 1; i++) {
             ans = ans * (row - i) / i;
 
             System.out.print(" " + ans);
 
         }
 
-        System.out.println(" " + 1);
+        System.out.println();
     }
 
 }
