@@ -98,13 +98,26 @@ public class PascalsTriangle {
     // TC : O(row²)
     // SC : O(1)
     public static void printRow(int row) {
-        print(row);
-    }
-
-    private static void print(int row) {
         for (int i = 1; i <= row; i++) {
             System.out.print(printValueAt(row, i) + " ");
         }
+    }
+
+    // TC: O(row)
+    // SC: O(1)
+    public static void printRowOptimal(int row) {
+        int ans = 1;
+
+        System.out.print(ans);
+
+        for (int i = 1; i <= row - 2; i++) {
+            ans = ans * (row - i) / i;
+
+            System.out.print(" " + ans);
+
+        }
+
+        System.out.println(" " + 1);
     }
 
 }
