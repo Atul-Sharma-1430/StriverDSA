@@ -63,4 +63,36 @@ public class PascalsTriangle {
 
         return pTriangle;
     }
+
+    // Question 2: If asked to print a particular value at given row, col
+    // TC : O(col)
+    // SC : O(1)
+    public static int printValueAt(int row, int col) {
+        return nCr(row - 1, col - 1);
+    }
+
+    private static int nCr(int n, int r) {
+
+        if (r > n) {
+            return 0;
+        }
+
+        if (r > n - r) {
+            r = n - r;
+        }
+
+        int numerator = 1;
+        int denominator = 1;
+
+        for (int i = 0; i < r; i++) {
+            numerator *= (n - i);
+        }
+
+        for (int i = 1; i <= r; i++) {
+            denominator *= i;
+        }
+
+        return numerator / denominator;
+    }
+
 }
