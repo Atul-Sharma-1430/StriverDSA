@@ -15,7 +15,6 @@ public class PascalsTriangle {
         List<List<Integer>> triangle = printPTriangle(rows);
 
         System.out.println("Pascal's Triangle:");
-
         for (List<Integer> row : triangle) {
             for (int num : row) {
                 System.out.print(num + " ");
@@ -93,6 +92,19 @@ public class PascalsTriangle {
         }
 
         return numerator / denominator;
+    }
+
+    // Question 3 : Print a particular row
+    // TC : O(row²)
+    // SC : O(1)
+    public static void printRow(int row) {
+        print(row);
+    }
+
+    private static void print(int row) {
+        for (int i = 1; i <= row; i++) {
+            System.out.print(printValueAt(row, i) + " ");
+        }
     }
 
 }
