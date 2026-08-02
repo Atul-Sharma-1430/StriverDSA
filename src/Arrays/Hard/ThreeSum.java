@@ -29,6 +29,37 @@ public class ThreeSum {
         return new ArrayList<>(set);
     }
 
+    // TC : O(n^2)
+    // SC : O(n) + O(triplets)
+    public static List<List<Integer>> threeSumBetter(int[] nums) {
+
+        Set<List<Integer>> set = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+
+            // Current i ke liye visited elements store krenge
+            Set<Integer> thirdValue = new HashSet<>();
+            for (int j = i + 1; j < nums.length; j++) {
+
+                // get value of third element
+                int third = -(nums[i] + nums[j]);
+
+                // Agar required third element pehle mil chuka hai
+                if (thirdValue.contains(third)) {
+                    List<Integer> triplet = new ArrayList<>(Arrays.asList(nums[i], nums[j], third));
+                    Collections.sort(triplet);
+                    set.add(triplet);
+                }
+
+                // Current element ko jab tak j lasst tak na pahuche tab tk  ke liye store kr do
+                thirdValue.add(nums[j]);
+            }
+        }
+
+        return new ArrayList<>(set);
+    }
+
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -45,6 +76,9 @@ public class ThreeSum {
 
         System.out.println("\nBrute Force:");
         System.out.println(threeSumBrute(nums.clone()));
+
+        System.out.println("\nBetter:");
+        System.out.println(threeSumBetter(nums.clone()));
 
         sc.close();
     }
