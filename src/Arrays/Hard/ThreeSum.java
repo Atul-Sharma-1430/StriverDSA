@@ -59,6 +59,72 @@ public class ThreeSum {
         return new ArrayList<>(set);
     }
 
+    // TC : O(n^2)
+    // SC : O(1)
+    public static List<List<Integer>> threeSumOptimal(int[] nums) {
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        // Two Pointer use krne ke liye array sort kro
+        Arrays.sort(nums);
+
+        int i = 0;
+        // Last 2 elements se triplet nahi ban sakta
+        while (i < nums.length - 2) {
+
+            int first = nums[i];
+            // Agar first element hi positive hai to aage sum 0 kabhi nahi banega kyuki sorted hain toh aage sab values badhi hi hongi
+            if (first > 0) {
+                break;
+            }
+
+            // Duplicate first element skip kro
+            if (i != 0 && nums[i] == nums[i - 1]) {
+                i++;
+                continue;
+            }
+
+            int j = i + 1;
+            int k = nums.length - 1;
+
+            // Two Sum login
+            while (j < k) {
+
+                int sum = first + nums[j] + nums[k];
+                // Sum bada hai to right pointer piche lao
+                if (sum > 0) {
+                    k--;
+                }
+                // Sum chhota hai to left pointer aage badhao
+                else if (sum < 0) {
+                    j++;
+                }
+
+                // if 0
+                else {
+                    ans.add(Arrays.asList(first, nums[j], nums[k]));
+
+                    // Left side ke duplicates skip kro
+                    while (j + 1 < k && nums[j] == nums[j + 1]) {
+                        j++;
+                    }
+
+                    // Right side ke duplicates skip kro
+                    while (k - 1 > j && nums[k] == nums[k - 1]) {
+                        k--;
+                    }
+
+                    // Next unique pair check kro
+                    j++;
+                    k--;
+                }
+            }
+
+            i++;
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
 
@@ -79,6 +145,9 @@ public class ThreeSum {
 
         System.out.println("\nBetter:");
         System.out.println(threeSumBetter(nums.clone()));
+
+        System.out.println("\nOptimal:");
+        System.out.println(threeSumOptimal(nums.clone()));
 
         sc.close();
     }
