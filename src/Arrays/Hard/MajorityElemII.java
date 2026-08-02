@@ -25,6 +25,8 @@ class MajorityElemII {
         return ans;
     }
 
+    // TC : O(n)
+    // SC : O(1)
     public static List<Integer> majorityElementOptimal(int[] nums) {
 
         // Candidate 1 store krega
