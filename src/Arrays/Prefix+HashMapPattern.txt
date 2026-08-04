@@ -1,0 +1,156 @@
+package Arrays;
+
+/*
+===========================================================
+        PREFIX + HASHMAP CHEAT SHEET
+===========================================================
+
+Step 1 : Initialize Map
+
+// Frequency Based
+map.put(0, 1);
+
+// Longest Subarray Based
+map.put(0, -1);
+
+
+===========================================================
+1. PREFIX SUM (Subarray Sum = K)
+LC 560, LC 930
+===========================================================
+
+prefix += nums[i];
+
+int need = prefix - k;
+
+count += map.getOrDefault(need, 0);
+
+map.put(prefix, map.getOrDefault(prefix, 0) + 1);
+
+
+
+===========================================================
+2. PREFIX XOR (Subarray XOR = K)
+GFG Count Subarrays with XOR
+===========================================================
+
+prefix ^= nums[i];
+
+int need = prefix ^ k;
+
+count += map.getOrDefault(need, 0);
+
+map.put(prefix, map.getOrDefault(prefix, 0) + 1);
+
+
+
+===========================================================
+3. PREFIX MOD (Subarray Sum Divisible by K)
+LC 974
+===========================================================
+
+prefix += nums[i];
+
+int rem = ((prefix % k) + k) % k;
+
+count += map.getOrDefault(rem, 0);
+
+map.put(rem, map.getOrDefault(rem, 0) + 1);
+
+
+
+===========================================================
+4. PREFIX BALANCE (Equal 0s and 1s)
+LC 525
+===========================================================
+
+// Convert
+if(nums[i] == 0)
+    prefix += -1;
+else
+    prefix += 1;
+
+count += map.getOrDefault(prefix, 0);
+
+map.put(prefix, map.getOrDefault(prefix, 0) + 1);
+
+
+
+===========================================================
+5. LONGEST SUBARRAY TEMPLATE
+LC 525, Longest Prefix Problems
+===========================================================
+
+map.put(0, -1);
+
+prefix += nums[i];
+
+if(map.containsKey(prefix)) {
+    ans = Math.max(ans, i - map.get(prefix));
+}
+else {
+    map.put(prefix, i);
+}
+
+
+
+===========================================================
+UNIVERSAL TEMPLATE
+===========================================================
+
+Map<Integer, Integer> map = new HashMap<>();
+
+map.put(initialValue, initialFrequency);
+
+int prefix = 0;
+
+for(int i = 0; i < nums.length; i++) {
+
+    // Update Prefix
+    prefix = ...
+
+    // Required Previous Prefix
+    int need = ...
+
+    // Use Previous Prefix
+    answer += map.getOrDefault(need, 0);
+
+    // Store Current Prefix
+    map.put(prefix, map.getOrDefault(prefix, 0) + 1);
+}
+
+
+
+===========================================================
+FORMULAS TO REMEMBER
+===========================================================
+
+Subarray Sum = K
+need = prefix - k
+
+Subarray XOR = K
+need = prefix ^ k
+
+Subarray Sum Divisible by K
+need = prefix % k
+
+Equal 0s & 1s
+need = prefix
+
+Longest Subarray
+Store first occurrence of prefix.
+
+
+
+===========================================================
+GOLDEN RULE
+===========================================================
+
+1. Decide Prefix
+2. Derive Required Previous Prefix
+3. Lookup in HashMap
+4. Update Answer
+5. Store Current Prefix
+
+That's it.
+*/
