@@ -20,7 +20,8 @@ public class CountOccurInSortedArray {
         int target = sc.nextInt();
 
         System.out.println("Brute Count: " + countBrute(nums, target));
-        System.out.println("Optimal Count: " + countOptimal(nums, target));
+        System.out.println("Optimal Count: " + countOptimal1(nums, target));
+        System.out.println("Optimal Count: " + countOptimal2(nums, target));
 
         sc.close();
     }
@@ -41,9 +42,10 @@ public class CountOccurInSortedArray {
         return count;
     }
 
+    // Optimal 1 : Using UB and LB
     // TC : O(log n)
     // SC : O(1)
-    public static int countOptimal(int[] nums, int target) {
+    public static int countOptimal1(int[] nums, int target) {
 
         int left = 0;
         int right = nums.length - 1;
@@ -84,5 +86,66 @@ public class CountOccurInSortedArray {
         }
 
         return upperB - lowerB; // bcz lower bound will point to the first occurence and right bound will point to first elem greater than target hence diff
+    }
+
+    // Using to separate Binary Search
+    // TC : O(log n)
+    // SC : O(1)
+    public static int countOptimal2(int[] nums, int target) {
+
+        int left = 0;
+        int right = nums.length - 1;
+        int first = -1;
+
+        // First Occurrence
+        while (left <= right) {
+
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) {
+
+                first = mid;
+                right = mid - 1;
+
+            } else if (nums[mid] > target) {
+
+                right = mid - 1;
+
+            } else {
+
+                left = mid + 1;
+            }
+        }
+
+        // Target not present
+        if (first == -1) {
+            return 0;
+        }
+
+        int low = 0;
+        int high = nums.length - 1;
+        int last = -1;
+
+        // Last Occurrence
+        while (low <= high) {
+
+            int mid = low + (high - low) / 2;
+
+            if (nums[mid] == target) {
+
+                last = mid;
+                low = mid + 1;
+
+            } else if (nums[mid] > target) {
+
+                high = mid - 1;
+
+            } else {
+
+                low = mid + 1;
+            }
+        }
+
+        return last - first + 1;
     }
 }
