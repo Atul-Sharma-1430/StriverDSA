@@ -2,6 +2,7 @@ package BinarySearch.BinarySearchOnAnswers;
 
 import java.util.Scanner;
 
+// Pattern : Binary search on Answers
 public class FindSquareRootOfNumber {
     // TC : O(log n)
     // SC : O(1)
