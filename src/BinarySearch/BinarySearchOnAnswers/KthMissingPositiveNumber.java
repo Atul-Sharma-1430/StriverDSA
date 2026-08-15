@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class KthMissingPositiveNumber {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter number of elements: ");
@@ -85,5 +86,33 @@ public class KthMissingPositiveNumber {
         }
 
         return ans;
+    }
+
+
+    // TC : O(log n)
+    // SC : O(1)s
+    public static int kthMissingPositive2(int[] nums, int k) {
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            // nums[mid] ke phle kitne positive numbers missing hain
+            int prevMissing = nums[mid] - mid - 1;
+
+            // Agar mid tak k ya usse zyada numbers missing hain toh kth missing number left side mein ho sakta hai
+            if (prevMissing >= k) {
+                right = mid - 1;
+
+            } else {
+                // Agar k se kam numbers missing hain toh kth missing number right side mein hoga
+                left = mid + 1;
+            }
+        }
+
+        // left vo position store karega jahan se kth missing number milega left + k karne par kth missing positive number mil jayega
+        return left + k;
     }
 }
