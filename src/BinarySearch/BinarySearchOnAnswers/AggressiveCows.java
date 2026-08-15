@@ -87,3 +87,11 @@ public class AggressiveCows {
         return ans;
     }
 }
+
+// 1. Answer ka search space/range dhundo
+//          ↓
+// 2. Mid mein ek possible answer choose karo
+//          ↓
+// 3. Check karo: "Kya ye answer possible hai?"
+//        ↓
+// 4. Possible / Not Possible ke basis par pointer move karo
