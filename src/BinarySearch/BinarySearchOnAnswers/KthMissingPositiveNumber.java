@@ -2,6 +2,7 @@ package BinarySearch.BinarySearchOnAnswers;
 
 import java.util.Scanner;
 
+// Pattern : Binary search on Answers
 public class KthMissingPositiveNumber {
     public static void main(String[] args) {
 
