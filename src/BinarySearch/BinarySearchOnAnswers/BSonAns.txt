@@ -1,0 +1,27 @@
+Binary Search on Answers:
+
+1. If asked: MIN of MAX
+   → Har mid ke liye MAX value / maximum limit check karo.
+   → Agar mid possible hai:
+        answer mil gaya, but aur chhota answer chahiye
+        right = mid - 1
+   → Agar mid possible nahi hai:
+        limit badhani padegi
+        left = mid + 1
+
+
+2. If asked: MAX of MIN
+   → Har mid ke liye MIN value / minimum limit check karo.
+   → Agar mid possible hai:
+        answer mil gaya, but aur bada answer chahiye
+        left = mid + 1
+   → Agar mid possible nahi hai:
+        value kam karni padegi
+        right = mid - 1
+
+
+
+
+
+   MIN of MAX  → Possible → LEFT jao
+   MAX of MIN  → Possible → RIGHT jao
