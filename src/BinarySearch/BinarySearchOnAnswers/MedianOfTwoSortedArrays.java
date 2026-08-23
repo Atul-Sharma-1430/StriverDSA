@@ -29,8 +29,103 @@ public class MedianOfTwoSortedArrays {
 
         System.out.println("Median = " + findMedianSortedArrays(nums1, nums2));
         System.out.println("Median = " + findMedianSortedArrays2(nums1, nums2));
+        System.out.println("Median = " + findMedianSortedArrays3(nums1, nums2));
 
         sc.close();
+    }
+
+    // Solution 3:
+    // TC : O(log(min(n1 , n2)))
+    // SC : O(1)
+    public static double findMedianSortedArrays3(int[] nums1, int[] nums2) {
+
+        // Binary Search hamesha smaller array par karenge taaki Time Complexity O(log(min(n1, n2))) rahe
+        if (nums1.length > nums2.length) {
+            return findMedianSortedArrays3(nums2, nums1);
+        }
+
+        int n1 = nums1.length; // nums1 ki total length
+        int n2 = nums2.length; // nums2 ki total length
+
+        int totalLength = n1 + n2; // Dono arrays ko virtually merge karne par total elements
+
+        // Left partition mein total elements ka half rakhna hai, +1 odd case ko handle karne ke liye
+        int leftSize = (totalLength + 1) / 2;
+
+        int low = 0; // nums1 ke partition ki minimum possible position
+        int high = n1; // nums1 ke partition ki maximum possible position
+
+        while (low <= high) {
+
+            // Binary Search ki help se nums1 mein current partition position find kar rahe hain
+            int partition1 = low + (high - low) / 2;
+
+            // Left partition mein total leftSize elements chahiye, isliye baaki nums2 se lenge
+            int partition2 = leftSize - partition1;
+
+            int left1; // nums1 ke left partition ka last element
+            int right1; // nums1 ke right partition ka first element
+            int left2; // nums2 ke left partition ka last element
+            int right2; // nums2 ke right partition ka first element
+
+            // Agar nums1 se left partition mein koi element nahi liya toh smallest possible value maanenge
+            if (partition1 == 0) {
+                left1 = Integer.MIN_VALUE;
+            } else {
+                left1 = nums1[partition1 - 1]; // Partition ke just left wala nums1 ka element
+            }
+
+            // Agar nums1 ke saare elements left partition mein hain toh largest possible value maanenge
+            if (partition1 == n1) {
+                right1 = Integer.MAX_VALUE;
+            } else {
+                right1 = nums1[partition1]; // Partition ke just right wala nums1 ka element
+            }
+
+            // Agar nums2 se left partition mein koi element nahi liya toh smallest possible value maanenge
+            if (partition2 == 0) {
+                left2 = Integer.MIN_VALUE;
+            } else {
+                left2 = nums2[partition2 - 1]; // Partition ke just left wala nums2 ka element
+            }
+
+            // Agar nums2 ke saare elements left partition mein hain toh largest possible value maanenge
+            if (partition2 == n2) {
+                right2 = Integer.MAX_VALUE;
+            } else {
+                right2 = nums2[partition2]; // Partition ke just right wala nums2 ka element
+            }
+
+            // Correct partition tab milega jab dono arrays ke left elements dono right elements se chhote ya equal hon
+            if (left1 <= right2 && left2 <= right1) {
+
+                // Agar total elements odd hain toh left partition ka maximum element hi median hoga
+                if (totalLength % 2 == 1) {
+                    return Math.max(left1, left2);
+                } else {
+
+                    // Even case mein left partition ka maximum aur right partition ka minimum middle elements honge
+                    int maxLeft = Math.max(left1, left2);
+                    int minRight = Math.min(right1, right2);
+
+                    // Dono middle elements ka average median hoga
+                    return (maxLeft + minRight) / 2.0;
+                }
+
+            } else if (left1 > right2) {
+
+                // left1 bada hai matlab nums1 se zyada elements left mein le liye, isliye partition left move karenge
+                high = partition1 - 1;
+
+            } else {
+
+                // left2 bada hai matlab nums1 se kam elements left mein liye, isliye partition right move karenge
+                low = partition1 + 1;
+            }
+        }
+
+        // Valid sorted arrays ke case mein yaha normally kabhi nahi aayega
+        return 0.0;
     }
 
     // Solution 2:
