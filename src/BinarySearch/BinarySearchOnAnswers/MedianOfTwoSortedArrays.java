@@ -28,8 +28,114 @@ public class MedianOfTwoSortedArrays {
         }
 
         System.out.println("Median = " + findMedianSortedArrays(nums1, nums2));
+        System.out.println("Median = " + findMedianSortedArrays2(nums1, nums2));
 
         sc.close();
+    }
+
+    // Solution 2:
+    // TC → O(n1 + n2)
+    // SC → O(1)
+    public static double findMedianSortedArrays2(int[] nums1, int[] nums2) {
+
+        int n1 = nums1.length; // nums1 ki length
+        int n2 = nums2.length; // nums2 ki length
+
+        int n = n1 + n2; // Dono arrays ko combine karne par total elements
+
+        int index2 = n / 2; // Median ka right/second index
+        int index1 = index2 - 1; // Median ka left/first index
+
+        int count = 0; // Virtual merged array mein current index track karega
+
+        int elem1 = -1, elem2 = -1; // Median ke 2 required elements store karenge
+
+        int i = 0, j = 0; // i -> nums1, j -> nums2 ko traverse karega
+
+
+        // Dono arrays mein elements available hain tab tak compare karenge
+        while (i < n1 && j < n2) {
+
+            // nums1 ka current element chhota hai
+            if (nums1[i] < nums2[j]) {
+
+                // Agar current position median ke left index par hai
+                if (count == index1) {
+                    elem1 = nums1[i]; // Left median element store karo
+                }
+
+                // Agar current position median ke right index par hai
+                if (count == index2) {
+                    elem2 = nums1[i]; // Right median element store karo
+                }
+
+                count++; // Virtual merged array ka index increase
+                i++; // nums1 mein next element par move
+            }
+
+            // nums2 ka current element chhota/equal hai
+            else {
+
+                // Agar current position median ke left index par hai
+                if (count == index1) {
+                    elem1 = nums2[j]; // Left median element store karo
+                }
+
+                // Agar current position median ke right index par hai
+                if (count == index2) {
+                    elem2 = nums2[j]; // Right median element store karo
+                }
+
+                count++; // Virtual merged array ka index increase
+                j++; // nums2 mein next element par move
+            }
+        }
+
+
+        // Agar nums1 mein abhi elements bach gaye hain
+        while (i < n1) {
+
+            // Median ke left element ko find karo
+            if (count == index1) {
+                elem1 = nums1[i];
+            }
+
+            // Median ke right element ko find karo
+            if (count == index2) {
+                elem2 = nums1[i];
+            }
+
+            count++; // Next virtual index
+            i++; // nums1 ka next element
+        }
+
+
+        // Agar nums2 mein abhi elements bach gaye hain
+        while (j < n2) {
+
+            // Median ke left element ko find karo
+            if (count == index1) {
+                elem1 = nums2[j];
+            }
+
+            // Median ke right element ko find karo
+            if (count == index2) {
+                elem2 = nums2[j];
+            }
+
+            count++; // Next virtual index
+            j++; // nums2 ka next element
+        }
+
+
+        // Agar total elements odd hain
+        if (n % 2 == 1) {
+            return elem2; // Sirf middle/right element hi median hoga
+        }
+
+        // Agar total elements even hain
+        // Median = dono middle elements ka average
+        return (double) (elem1 + elem2) / 2.0;
     }
 
     // Solution 1:
