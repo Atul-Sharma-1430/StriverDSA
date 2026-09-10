@@ -68,6 +68,11 @@ public class SearchIn2DMatrix {
         int left = 0;
         int right = array.length - 1;
 
+        // Agar target current row ke range mein nahi hai
+        if (array[0] > target || array[right] < target) {
+            return false;
+        }
+
         while (left <= right) {
 
             int mid = left + (right - left) / 2;
