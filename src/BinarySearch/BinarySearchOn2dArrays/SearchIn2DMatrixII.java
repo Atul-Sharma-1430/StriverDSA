@@ -43,18 +43,22 @@ public class SearchIn2DMatrixII {
             int right = matrix[i].length - 1;
 
             // Current row par Binary Search lagayenge
-            while (left <= right) {
+            if (matrix[i][0] <= target && matrix[i][matrix[i].length - 1] >= target) {
 
-                int mid = left + (right - left) / 2;
+                while (left <= right) {
 
-                if (matrix[i][mid] == target) {
-                    return true;
-                } else if (matrix[i][mid] < target) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
+                    int mid = left + (right - left) / 2;
+
+                    if (matrix[i][mid] == target) {
+                        return true;
+                    } else if (matrix[i][mid] < target) {
+                        left = mid + 1;
+                    } else {
+                        right = mid - 1;
+                    }
                 }
             }
+
         }
 
         return false;
