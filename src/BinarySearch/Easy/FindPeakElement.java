@@ -3,6 +3,22 @@ package BinarySearch.Easy;
 import java.util.Scanner;
 
 public class FindPeakElement {
+
+    // TC : O(n)
+    // SC : O(1)
+    // Maximum element will always be a peak element
+    public static int findPeakElement3(int[] nums) {
+
+        int largest = Integer.MIN_VALUE;
+
+        for (int i = 0; i < nums.length; i++) {
+
+            largest = Math.max(nums[i], largest);
+        }
+
+        return largest;
+    }
+
     // TC: O(n), SC: O(1)
     public static int findPeakElement1(int[] nums) {
         // Agar array mein sirf ek element hai toh wahi peak element hoga.
@@ -75,6 +91,7 @@ public class FindPeakElement {
 
         System.out.println("Peak Element Index using Linear Search: " + findPeakElement1(nums));
         System.out.println("Peak Element Index using Binary Search: " + findPeakElement2(nums));
+        System.out.println("Peak Element Index using Binary Search: " + findPeakElement3(nums));
 
         sc.close();
     }
