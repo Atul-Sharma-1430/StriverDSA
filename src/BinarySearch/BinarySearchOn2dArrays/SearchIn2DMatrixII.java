@@ -31,6 +31,33 @@ public class SearchIn2DMatrixII {
         sc.close();
     }
 
+    // Optimal : Ye Ladder Binary Search / Staircase Search approach.
+    // TC : O(n + m)
+    // SC : O(1)
+    public static boolean searchMatrixOptimal(int[][] matrix, int target) {
+
+        int row = 0;
+        int col = matrix[0].length - 1;
+
+        while (row < matrix.length && col >= 0) {
+
+            // agar curr elem target se equal hai toh return true
+            if (matrix[row][col] == target) {
+                return true;
+            }
+            // agar curr value > hai toh col-- bcz us col me uske niche sab values target se badi ho hongi
+            else if (matrix[row][col] > target) {
+                col--;
+            }
+            // agar curr value < hai toh row++ bcz us row me uske aage, piche sab values target se choti ho hongi
+            else {
+                row++;
+            }
+        }
+
+        return false;
+    }
+
     // Better
     // Solution 2 : Har row ko one by one check karenge
     // TC : O(n * log(m))
