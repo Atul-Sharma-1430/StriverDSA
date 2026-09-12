@@ -37,6 +37,7 @@ public class MatrixMedian {
     // SC : O(m * n)
     public static double findMedianBrute(int[][] array) {
 
+        // 2D ko ek 1d me convert kr rhe hain
         int[] oneDArray = new int[array.length * array[0].length];
         int index = 0;
 
@@ -46,8 +47,10 @@ public class MatrixMedian {
             }
         }
 
+        // Sort
         Arrays.sort(oneDArray);
 
+        // Middle elem return kr do
         return oneDArray[oneDArray.length / 2];
     }
 }
