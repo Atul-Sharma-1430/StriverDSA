@@ -2,9 +2,18 @@ package LinkedList.LearnDoublyLL;
 
 public class ArrayToDLL {
     public static Node arrayToDLL(int[] array) {
+
+        if (array.length == 0) {
+            return null;
+        }
+
         Node head = new Node(array[0]);
 
         Node prev = head;
+
+        if (array.length == 1) {
+            return head;
+        }
 
         for (int i = 1; i < array.length; i++) {
             // directly yha bhi kr sakte hai
